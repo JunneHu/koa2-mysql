@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>koa2页面</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/javascripts/jquery.js"></script>
+</head>
+
+<body>
+  <div>
+    <%= title %>
+  </div>
+  <script>
+    // login()
+
+    function login() {
+      $.ajax({
+        url: "http://10.0.1.236:3000/user/login", // 目标资源
+        type: "post", // 请求方式
+        dataType: 'json',
+        data: {
+          mobileNo: '18186146970',
+          password: '123456'
+        },
+        success: function (data) {
+          console.log(data)
+          if (data.code === '0') {
+          }
+        }
+      });
+    }
+    getUserInfo()
+    function getUserInfo() {
+      $.ajax({
+        type: "get", // 请求方式
+        url: "http://10.0.1.236:3000/user/getUserInfo?mobileNo=18186146971", // 目标资源
+        headers: {
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTgxODYxNDY5NzEiLCJwYXNzV29yZCI6ImUxMGFkYzM5NDliYTU5YWJiZTU2ZTA1N2YyMGY4ODNlIiwiaWF0IjoxNTY0NDY4MTQ5LCJleHAiOjE1NjYyNjgxNDl9.IwUHDF2zmXNQiMLhbVnOHjijeVC4nOTo1oyKt4BwgyI'
+        },
+        data: {}, // 请求参数
+        success: function (data) {
+          console.log(data)
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
