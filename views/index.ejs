@@ -10,6 +10,31 @@
 <body>
   <div>
     <%= title %>
+      <ul>
+        <% for(var i in data.arr1){ %>
+          <li>
+            <%= data.arr1[i].type %>--
+              <%= data.arr1[i].name %>
+          </li>
+          <% } %>
+      </ul>
+      ////////////////////////////////////////////////////////
+      <ul>
+        <% for(var i in data.arr2){ %>
+          <li>
+            <%= data.arr2[i].type %>--
+              <%= data.arr2[i].name %>
+          </li>
+          <% } %>
+      </ul>
+      //////////////////////////////////
+      <ul>
+        <% for(var i in data.ban){ %>
+          <li>
+            <img src=<%= data.ban[i].src %> style="width:150px;height:80px" />
+          </li>
+          <% } %>
+      </ul>
   </div>
   <script>
     // login()

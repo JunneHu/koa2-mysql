@@ -32,7 +32,7 @@ router.use('/comment', comment.routes(), comment.allowedMethods())
 
 // 模拟爬虫
 
-let arr, obj;
+let arr1, arr2, ban;
 
 router.get('/', async (ctx, next) => {
   let url = 'https://www.xxsy.net/';
@@ -49,17 +49,37 @@ router.get('/', async (ctx, next) => {
         lowerCaseTags: false
       }) //用cheerio解析页面数据
 
-      arr = [];
+      arr1 = [], arr2 = [], ban = [];
 
-      $(".text-list li").each((index, element) => {
-        obj = {
-          type: $(element).find('.classify').text(),
+      $(".sidebar .text-list li").each((index, element) => {
+        arr1.push({
+          type: $(element).find('.classify').text().replace('[', '').replace(']', ''),
           name: $(element).find('a').text(),
-        }
-        arr.push(obj);
+        });
       });
+
+      $(".extrabar .text-list li").each((index, element) => {
+        arr2.push({
+          type: $(element).find('.classify').text().replace('[', '').replace(']', ''),
+          name: $(element).find('a').text(),
+        });
+      });
+
+      $(".roasting .roastingslider li").each((index, element) => {
+        ban.push({
+          src: $(element).find('a img').attr("src"),
+        });
+      });
+
     });
-  ctx.body = arr;
+  await ctx.render('index', {
+    title: '加载成功',
+    data: {
+      arr1,
+      arr2,
+      ban
+    },
+  })
 
 })
 
