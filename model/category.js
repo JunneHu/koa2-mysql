@@ -1,6 +1,6 @@
-// 1级分类
+// 大分类
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('category1', {
+    return sequelize.define('category', {
         // id
         id: {
             type: DataTypes.INTEGER,   // 类型
@@ -22,11 +22,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true,
             fiele: "sort"
-        },
-        parentId:{   // 父级id
-            type: DataTypes.STRING,
-            allowNull: false,
-            fiele: "parentId"
-        },
+        }
     })
 }

@@ -11,6 +11,8 @@ const order = require('./order')
 const banner = require('./banner')
 const video = require('./video')
 const comment = require('./comment')
+const book = require('./book')
+const chapter = require('./chapter')
 
 // router.get('/', async (ctx, next) => {
 //   await ctx.render('index', {
@@ -28,6 +30,8 @@ router.use('/order', order.routes(), order.allowedMethods())
 router.use('/banner', banner.routes(), banner.allowedMethods())
 router.use('/video', video.routes(), video.allowedMethods())
 router.use('/comment', comment.routes(), comment.allowedMethods())
+router.use('/book', book.routes(), book.allowedMethods())
+router.use('/chapter', chapter.routes(), chapter.allowedMethods())
 
 
 // 模拟爬虫

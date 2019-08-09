@@ -70,7 +70,8 @@ class userController {
                         code: '0',
                         data: {
                             token: token,
-                            userInfo: data
+                            userName: data.userName,
+                            mobileNo:data.mobileNo
                         },
                         message: '登陆成功'
                     }
