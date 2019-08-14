@@ -1,6 +1,6 @@
 const db = require('../config/db')         // 引入配置文件
 const Sequelize = db.sequelize;
-const Chapter = Sequelize.import("../model/chapter.js"); 
+const Chapter = Sequelize.import("../model/chapter.js");
 Chapter.sync({ force: false });    // 自动创建表 (加force:true, 会先删掉表后再建表)
 
 class ChapterService {
@@ -21,7 +21,7 @@ class ChapterService {
     }
 
     /*
-    *  查询列表
+    *  查询列表  所有的
     */
     static async getList(data) {
         if (data) {
@@ -30,7 +30,7 @@ class ChapterService {
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
                 order: [
-                    ['updatedAt', 'DESC']
+                    ['sort', 'ASC']
                 ]
             });
             return {
@@ -43,13 +43,24 @@ class ChapterService {
         } else {
             const list = await Chapter.findAll({
                 order: [
-                    ['updatedAt', 'DESC']
+                    ['sort', 'ASC']
                 ]
             });
             return {
                 list
             };
         }
+    }
+    static async getListByBookId(id) {
+        const list = await Chapter.findAll({
+            where: { bookId: id },
+            order: [
+                ['sort', 'ASC']
+            ]
+        });
+        return {
+            list
+        };
     }
     /*
         *  删除

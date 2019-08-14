@@ -13,6 +13,7 @@ const video = require('./video')
 const comment = require('./comment')
 const book = require('./book')
 const chapter = require('./chapter')
+const usersBook = require('./usersBook')
 
 // router.get('/', async (ctx, next) => {
 //   await ctx.render('index', {
@@ -32,6 +33,7 @@ router.use('/video', video.routes(), video.allowedMethods())
 router.use('/comment', comment.routes(), comment.allowedMethods())
 router.use('/book', book.routes(), book.allowedMethods())
 router.use('/chapter', chapter.routes(), chapter.allowedMethods())
+router.use('/usersBook', usersBook.routes(), usersBook.allowedMethods())
 
 
 // 模拟爬虫

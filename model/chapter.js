@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             fiele: "bookId"
+        },
+        sort: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            fiele: "sort"
         }
     })
 }

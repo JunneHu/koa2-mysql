@@ -52,6 +52,25 @@ class ChapterController {
             }
         }
     }
+    static async getListByBookId(ctx) {
+        let bid = ctx.params.bid;
+        try {
+            let data = await ChapterService.getListByBookId(bid);
+            ctx.response.status = 200;
+            return ctx.body = {
+                code: '0',
+                message: "成功",
+                data: data
+            }
+        } catch (error) {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: '-1',
+                message: "失败",
+                data: error
+            }
+        }
+    }
     static async delete(ctx) {
         let id = ctx.params.id;
         if (id) {
