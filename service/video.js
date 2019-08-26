@@ -1,6 +1,6 @@
 const db = require('../config/db')         // 引入配置文件
 const Sequelize = db.sequelize;
-const Video = Sequelize.import("../model/video.js"); 
+const Video = Sequelize.import("../model/video.js");
 Video.sync({ force: false });    // 自动创建表 (加force:true, 会先删掉表后再建表)
 
 class VideoService {
@@ -24,9 +24,12 @@ class VideoService {
     *  查询列表
     */
     static async getList(data) {
-        if (data) {
+        if (data.pageIndex && data.pageSize) {
             const { pageIndex, pageSize } = data;
             const list = await Video.findAndCountAll({
+                where: data.parentId && {
+                    category: data.parentId
+                },
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
                 order: [
@@ -42,6 +45,9 @@ class VideoService {
             };
         } else {
             const list = await Video.findAll({
+                where: data.parentId && {
+                    category: data.parentId
+                },
                 order: [
                     ['updatedAt', 'DESC']
                 ]

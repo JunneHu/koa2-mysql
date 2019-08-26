@@ -3,7 +3,7 @@ const VideoService = require("../service/video");
 class VideoController {
     static async add(ctx) {
         let req = ctx.request.body;
-        if (req.category && req.type && req.name && req.actor && req.img && req.num && req.url && req.time && req.content) { 
+        if (req.category && req.type && req.name && req.actor && req.img && req.num && req.time && req.content) { 
             try {
                 const ret = await VideoService.addVideo(req);
                 ctx.response.status = 200;
@@ -30,13 +30,7 @@ class VideoController {
     static async getList(ctx) {
         const params = ctx.request.query;
         try {
-            let data = {}
-            if (params && params.pageSize && params.pageIndex) {
-                data = await VideoService.getList(params);
-            } else {
-                data = await VideoService.getList();
-            }
-            
+            let data = await VideoService.getList(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',

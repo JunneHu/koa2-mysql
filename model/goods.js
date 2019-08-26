@@ -38,10 +38,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             fiele: "content"
         },
-        category2Id:{
+        parentId:{
             type: DataTypes.INTEGER,
             allowNull: true,
-            fiele: "category2Id"
+            fiele: "parentId"
         },
     })
 }

@@ -27,10 +27,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             fiele: "content"
         },
-        type:{
+        parentId:{
             type: DataTypes.INTEGER,
             allowNull: false,
-            fiele: "type"
+            fiele: "parentId"
         },
         // 图片
         img: {

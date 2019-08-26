@@ -35,16 +35,27 @@ class BookService {
     static async getList(data) {
         if (data.pageSize) {
             const { pageIndex, pageSize } = data;
-            const list = await Book.findAndCountAll({
-                where: {
-                    parentId: data.parentId
-                },
-                limit: parseInt(pageSize),
-                offset: parseInt(pageIndex - 1) * parseInt(pageSize),
-                order: [
-                    ['updatedAt', 'DESC']
-                ]
-            });
+            let list;
+            if (data.parentId) {
+                list = await Book.findAndCountAll({
+                    where: {
+                        parentId: data.parentId
+                    },
+                    limit: parseInt(pageSize),
+                    offset: parseInt(pageIndex - 1) * parseInt(pageSize),
+                    order: [
+                        ['updatedAt', 'DESC']
+                    ]
+                });
+            } else {
+                list = await Book.findAndCountAll({
+                    limit: parseInt(pageSize),
+                    offset: parseInt(pageIndex - 1) * parseInt(pageSize),
+                    order: [
+                        ['updatedAt', 'DESC']
+                    ]
+                });
+            }
             return {
                 list: list.rows,
                 pageIndex: parseInt(pageIndex),

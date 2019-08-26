@@ -14,6 +14,7 @@ const comment = require('./comment')
 const book = require('./book')
 const chapter = require('./chapter')
 const usersBook = require('./usersBook')
+const music = require('./music')
 
 // router.get('/', async (ctx, next) => {
 //   await ctx.render('index', {
@@ -30,6 +31,7 @@ router.use('/goods', goods.routes(), goods.allowedMethods())
 router.use('/order', order.routes(), order.allowedMethods())
 router.use('/banner', banner.routes(), banner.allowedMethods())
 router.use('/video', video.routes(), video.allowedMethods())
+router.use('/music', music.routes(), music.allowedMethods())
 router.use('/comment', comment.routes(), comment.allowedMethods())
 router.use('/book', book.routes(), book.allowedMethods())
 router.use('/chapter', chapter.routes(), chapter.allowedMethods())

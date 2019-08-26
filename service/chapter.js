@@ -24,9 +24,12 @@ class ChapterService {
     *  查询列表  所有的
     */
     static async getList(data) {
-        if (data) {
+        if (data.pageSize) {
             const { pageIndex, pageSize } = data;
             const list = await Chapter.findAndCountAll({
+                where:{
+                    bookId:data.bookId
+                },
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
                 order: [
@@ -42,6 +45,9 @@ class ChapterService {
             };
         } else {
             const list = await Chapter.findAll({
+                where:{
+                    bookId:data.bookId
+                },
                 order: [
                     ['sort', 'ASC']
                 ]
@@ -50,17 +56,6 @@ class ChapterService {
                 list
             };
         }
-    }
-    static async getListByBookId(id) {
-        const list = await Chapter.findAll({
-            where: { bookId: id },
-            order: [
-                ['sort', 'ASC']
-            ]
-        });
-        return {
-            list
-        };
     }
     /*
         *  删除

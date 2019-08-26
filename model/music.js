@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('video', {
+    return sequelize.define('music', {
         // id
         id: {
             type: DataTypes.INTEGER,   // 类型
@@ -9,17 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,         // 是否可以为空
             autoIncrement: true      // 是否自增
         },
-        // 所属分类  电视  电影  综艺
+        // 所属分类
         category: {
             type: DataTypes.INTEGER,
             allowNull: false,
             fiele: "category"
-        },
-        // 类型   电视  电影   综艺  
-        type: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            fiele: "type"
         },
         // 名称
         name: {
@@ -27,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             fiele: "name"
         },
-        // 演员  每个演员用,分隔
-        actor: {
+        // 歌手  每个演员用,分隔
+        musicist: {
             type: DataTypes.STRING,
             allowNull: false,
-            fiele: "actor"
+            fiele: "musicist"
         },
         // 封面图
         img: {
@@ -39,31 +33,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             fiele: "img"
         },
-        // 集数
-        num: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            fiele: "num"
-        },
-        // 每集的播放地址   每个地址用,分隔
+        // 音乐地址
         url: {
             type: DataTypes.TEXT,
             allowNull: true,
             fiele: "url"
         },
-        // 时长
-        time: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            fiele: "time"
-        },
-        // 二级标题
-        secondName: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            fiele: "secondName"
-        },
-        // 简介
+        // 歌词
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
@@ -74,12 +50,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
             fiele: "tips"
-        },
-        // 评分
-        grade: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            fiele: "grade"
         }
     })
 }

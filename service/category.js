@@ -51,7 +51,7 @@ class CategoryService {
         })
     }
     static async getCategoryList(data) {
-        if (data) {
+        if (data.pageIndex && data.pageSize) {
             const { pageIndex, pageSize } = data;
             const list = await Category.findAndCountAll({
                 limit: parseInt(pageSize),
@@ -90,9 +90,12 @@ class CategoryService {
         };
     }
     static async getCategory1List(data) {
-        if (data) {
+        if (data.pageIndex && data.pageSize) {
             const { pageIndex, pageSize } = data;
             const list = await Category1.findAndCountAll({
+                where: data.parentId && {
+                    parentId: data.parentId
+                },
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
                 order: [
@@ -108,6 +111,9 @@ class CategoryService {
             };
         } else {
             const list = await Category1.findAll({
+                where: data.parentId && {
+                    parentId: data.parentId
+                },
                 order: [
                     ['sort', 'ASC']
                 ]
@@ -118,9 +124,12 @@ class CategoryService {
         }
     }
     static async getCategory2List(data) {
-        if (data) {
+        if (data.pageIndex && data.pageSize) {
             const { pageIndex, pageSize } = data;
             const list = await Category2.findAndCountAll({
+                where: data.parentId && {
+                    parentId: data.parentId
+                },
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
                 order: [
@@ -136,6 +145,9 @@ class CategoryService {
             };
         } else {
             const list = await Category2.findAll({
+                where: data.parentId && {
+                    parentId: data.parentId
+                },
                 order: [
                     ['sort', 'ASC']
                 ]

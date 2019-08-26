@@ -85,13 +85,7 @@ class CategoryController {
     static async getCategory(ctx) {
         const params = ctx.request.query;
         try {
-            let data = {}
-            if (params && params.pageSize && params.pageIndex) {
-                data = await CategoryService.getCategoryList(params);
-            } else {
-                data = await CategoryService.getCategoryList();
-            }
-            
+            let data = await CategoryService.getCategoryList(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',
@@ -110,13 +104,7 @@ class CategoryController {
     static async getCategory1(ctx) {
         const params = ctx.request.query;
         try {
-            let data = {}
-            if (params && params.pageSize && params.pageIndex) {
-                data = await CategoryService.getCategory1List(params);
-            } else {
-                data = await CategoryService.getCategory1List();
-            }
-            
+            let data = await CategoryService.getCategory1List(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',
@@ -135,13 +123,7 @@ class CategoryController {
     static async getCategory2(ctx) {
         const params = ctx.request.query;
         try {
-            let data = {}
-            if (params && params.pageSize && params.pageIndex) {
-                data = await CategoryService.getCategory2List(params);
-            } else {
-                data = await CategoryService.getCategory2List();
-            }
-            
+            let data = await CategoryService.getCategory2List(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',

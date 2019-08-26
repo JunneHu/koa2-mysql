@@ -1,11 +1,11 @@
-const AtricleService = require("../service/article");
+const MusicService = require("../service/music");
 
-class articleController {
-    static async create(ctx) {
+class MusicController {
+    static async add(ctx) {
         let req = ctx.request.body;
-        if (req.title && req.author && req.content && req.parentId) {
+        if (req.category && req.name && req.musicist && req.img && req.content) { 
             try {
-                const ret = await AtricleService.createArticle(req);
+                const ret = await MusicService.addMusic(req);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: '0',
@@ -30,7 +30,7 @@ class articleController {
     static async getList(ctx) {
         const params = ctx.request.query;
         try {
-            let data = await AtricleService.getList(params);            
+            let data = await MusicService.getList(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',
@@ -46,11 +46,29 @@ class articleController {
             }
         }
     }
+    static async getDetail(ctx) {
+        let id = ctx.params.id;
+        const query = await MusicService.getMusic(id);
+        if (!query) {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: '-1',
+                message: "id不存在"
+            }
+        } else {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: '0',
+                message: "成功",
+                data: query
+            }
+        }
+    }
     static async delete(ctx) {
         let id = ctx.params.id;
         if (id) {
             try {
-                const query = await AtricleService.getArticleDetail(id);
+                const query = await MusicService.getMusic(id);
                 if (!query) {
                     ctx.response.status = 200;
                     ctx.body = {
@@ -58,7 +76,7 @@ class articleController {
                         message: "id不存在"
                     }
                 } else {
-                    const ret = await AtricleService.delete(id);
+                    const ret = await MusicService.delete(id);
                     ctx.response.status = 200;
                     ctx.body = {
                         code: '0',
@@ -82,4 +100,4 @@ class articleController {
         }
     }
 }
-module.exports = articleController;
+module.exports = MusicController;

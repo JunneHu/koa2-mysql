@@ -1,21 +1,21 @@
 const db = require('../config/db')         // 引入配置文件
 const Sequelize = db.sequelize;
-const Article = Sequelize.import("../model/article");     // 引入文章数据表模型文件
-Article.sync({ force: false });    // 自动创建表 (加force:true, 会先删掉表后再建表)
+const Music = Sequelize.import("../model/music.js");
+Music.sync({ force: false });    // 自动创建表 (加force:true, 会先删掉表后再建表)
 
-class AtricleService {
+class MusicService {
     /*
-    * 创建文章模型
+    * 新增商品
     */
-    static async createArticle(data) {
-        return await Article.create(data)
+    static async addMusic(data) {
+        return await Music.create(data)
     }
 
     /*
-    *  查询文章详情
+    *  查询商品
     */
-    static async getArticleDetail(id) {
-        return await Article.findOne({
+    static async getMusic(id) {
+        return await Music.findOne({
             where: { id }
         })
     }
@@ -26,9 +26,9 @@ class AtricleService {
     static async getList(data) {
         if (data.pageIndex && data.pageSize) {
             const { pageIndex, pageSize } = data;
-            const list = await Article.findAndCountAll({
+            const list = await Music.findAndCountAll({
                 where: data.parentId && {
-                    parentId: data.parentId
+                    category: data.parentId
                 },
                 limit: parseInt(pageSize),
                 offset: parseInt(pageIndex - 1) * parseInt(pageSize),
@@ -44,9 +44,9 @@ class AtricleService {
                 totalPage: Math.ceil(list.count / pageSize),
             };
         } else {
-            const list = await Article.findAll({
+            const list = await Music.findAll({
                 where: data.parentId && {
-                    parentId: data.parentId
+                    category: data.parentId
                 },
                 order: [
                     ['updatedAt', 'DESC']
@@ -61,10 +61,10 @@ class AtricleService {
         *  删除
     */
     static async delete(id) {
-        return await Article.destroy({
+        return await Music.destroy({
             where: { id }
         })
     }
 }
 
-module.exports = AtricleService;
+module.exports = MusicService;

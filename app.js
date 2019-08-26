@@ -43,11 +43,11 @@ app.use(async (ctx, next) => {
   })
 })
 // unless()表示里面的regist、login不做token验证
-// app.use(koajwt({
-//   secret: '123456'
-// }).unless({
-//   path: [/^\/api\/user\/regist/,/^\/api\/user\/login/]
-// }))
+app.use(koajwt({
+  secret: '123456'
+}).unless({
+  path: [/^\/api\/user\/regist/,/^\/api\/user\/login/]
+}))
 
 // routes
 app.use(index.routes(), index.allowedMethods())

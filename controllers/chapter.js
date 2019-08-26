@@ -30,32 +30,8 @@ class ChapterController {
     static async getList(ctx) {
         const params = ctx.request.query;
         try {
-            let data = {}
-            if (params && params.pageSize && params.pageIndex) {
-                data = await ChapterService.getList(params);
-            } else {
-                data = await ChapterService.getList();
-            }
+            let data = await ChapterService.getList(params);
             
-            ctx.response.status = 200;
-            return ctx.body = {
-                code: '0',
-                message: "成功",
-                data: data
-            }
-        } catch (error) {
-            ctx.response.status = 200;
-            ctx.body = {
-                code: '-1',
-                message: "失败",
-                data: error
-            }
-        }
-    }
-    static async getListByBookId(ctx) {
-        let bid = ctx.params.bid;
-        try {
-            let data = await ChapterService.getListByBookId(bid);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',
