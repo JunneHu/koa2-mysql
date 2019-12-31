@@ -27,5 +27,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             fiele: "userName"        // 自定义列名称
         },
+        // 用户名
+        age: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            fiele: "age"        // 自定义列名称
+        },
     })
 }

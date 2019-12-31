@@ -8,4 +8,6 @@ router.get('/', chapterController.getList)
 
 router.delete('/:id', chapterController.delete)
 
+router.post('/read', chapterController.read)
+
 module.exports = router;

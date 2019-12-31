@@ -1,18 +1,11 @@
-const ChapterService = require("../service/chapter");
-const AipSpeechClient = require("baidu-aip-sdk").speech;
-const HttpClient = require("baidu-aip-sdk").HttpClient;
+const PageService = require("../service/page");
 
-// 设置APPID/AK/SK
-const APP_ID = "17084622";
-const API_KEY = "tGDuXsjth4pOF9AEGzwIR1PG";
-const SECRET_KEY = "Vo4yHgPrnQFXKdpHQmZTzukeMCzojAm1";
-
-class ChapterController {
+class PageController {
     static async add(ctx) {
         let req = ctx.request.body;
-        if (req.title && req.content && req.isFree && req.bookId) {
+        if (req.name && req.link && req.site) {
             try {
-                const ret = await ChapterService.addChapter(req);
+                const ret = await PageService.addPage(req);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: '0',
@@ -37,8 +30,7 @@ class ChapterController {
     static async getList(ctx) {
         const params = ctx.request.query;
         try {
-            let data = await ChapterService.getList(params);
-
+            let data = await PageService.getList(params);
             ctx.response.status = 200;
             return ctx.body = {
                 code: '0',
@@ -54,11 +46,31 @@ class ChapterController {
             }
         }
     }
+
+    static async getDetail(ctx) {
+        let id = ctx.params.id;
+        const query = await PageService.getPage(id);
+        if (!query) {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: '-1',
+                message: "id不存在"
+            }
+        } else {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: '0',
+                message: "成功",
+                data: query
+            }
+        }
+    }
+
     static async delete(ctx) {
         let id = ctx.params.id;
         if (id) {
             try {
-                const query = await ChapterService.getChapter(id);
+                const query = await PageService.getPage(id);
                 if (!query) {
                     ctx.response.status = 200;
                     ctx.body = {
@@ -66,7 +78,7 @@ class ChapterController {
                         message: "id不存在"
                     }
                 } else {
-                    const ret = await ChapterService.delete(id);
+                    const ret = await PageService.delete(id);
                     ctx.response.status = 200;
                     ctx.body = {
                         code: '0',
@@ -89,17 +101,5 @@ class ChapterController {
             }
         }
     }
-    static async read(ctx) {
-        let text = ctx.request.body.text;
-        if (text) {
-            // https://openapi.baidu.com/oauth/2.0/token
-        } else {
-            ctx.response.status = 200;
-            ctx.body = {
-                code: '-2',
-                message: "参数不全"
-            }
-        }
-    }
 }
-module.exports = ChapterController;
+module.exports = PageController;

@@ -15,7 +15,11 @@ const book = require('./book')
 const chapter = require('./chapter')
 const usersBook = require('./usersBook')
 const music = require('./music')
-
+const site = require('./site')
+const page = require('./page')
+const temp = require('./temp')
+const tempModal = require('./tempModal')
+const pageTempModal = require('./page_temp')
 // router.get('/', async (ctx, next) => {
 //   await ctx.render('index', {
 //     title: '加载成功'
@@ -36,6 +40,11 @@ router.use('/comment', comment.routes(), comment.allowedMethods())
 router.use('/book', book.routes(), book.allowedMethods())
 router.use('/chapter', chapter.routes(), chapter.allowedMethods())
 router.use('/usersBook', usersBook.routes(), usersBook.allowedMethods())
+router.use('/site', site.routes(), site.allowedMethods())
+router.use('/page', page.routes(), page.allowedMethods())
+router.use('/temp', temp.routes(), temp.allowedMethods())
+router.use('/tempModal', tempModal.routes(), tempModal.allowedMethods())
+router.use('/pageTemp', pageTempModal.routes(), pageTempModal.allowedMethods())
 
 
 // 模拟爬虫
